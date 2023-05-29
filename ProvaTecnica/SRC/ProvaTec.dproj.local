@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2017/01/28 11:25:27.000.335,C:\Users\EdersondeSouza\Documents\Embarcadero\Studio\Projects\Sia\Sia.dproj=C:\Users\EdersondeSouza\Documents\Embarcadero\Studio\Projects\Sia\Gerente.dproj</Transaction>
+    <Transaction>2017/01/29 23:12:45.000.652,C:\Users\EdersondeSouza\Documents\Embarcadero\Studio\Projects\Sia\ulogin.dfm=C:\Users\EdersondeSouza\Documents\Embarcadero\Studio\Projects\Sia\Unit17.dfm</Transaction>
+    <Transaction>2017/01/29 23:12:45.000.652,C:\Users\EdersondeSouza\Documents\Embarcadero\Studio\Projects\Sia\ulogin.pas=C:\Users\EdersondeSouza\Documents\Embarcadero\Studio\Projects\Sia\Unit17.pas</Transaction>
+    <Transaction>2017/01/29 23:22:38.000.191,C:\Users\EdersondeSouza\Documents\Embarcadero\Studio\Projects\Sia\umain.pas=C:\Users\EdersondeSouza\Documents\Embarcadero\Studio\Projects\Sia\Unit1.pas</Transaction>
+    <Transaction>2017/01/29 23:22:38.000.191,C:\Users\EdersondeSouza\Documents\Embarcadero\Studio\Projects\Sia\umain.dfm=C:\Users\EdersondeSouza\Documents\Embarcadero\Studio\Projects\Sia\Unit1.dfm</Transaction>
+    <Transaction>2017/02/01 07:48:27.000.689,C:\fontes\Criare\trunk\GerenteWeb\umain.dfm=C:\fontes\Criare\trunk\GerenteWeb\uformbase.dfm</Transaction>
+    <Transaction>2017/02/01 07:50:24.000.339,C:\fontes\Criare\trunk\GerenteWeb\umain.dfm=C:\fontes\Criare\trunk\GerenteWeb\Unit1.dfm</Transaction>
+    <Transaction>2023/05/28 02:51:26.000.513,=E:\Sistemas\Excellent\ProvaTecnica_1\FontesIW\Gerente\ulogin.pas</Transaction>
+    <Transaction>2023/05/28 03:07:49.000.003,E:\Sistemas\Excellent\ProvaTecnica_1\FontesIW\Gerente\UserSessionUnit.pas=</Transaction>
+    <Transaction>2023/05/28 03:18:19.000.302,=E:\Sistemas\Excellent\ProvaTecnica_1\FontesIW\Gerente\ulogin.pas</Transaction>
+    <Transaction>2023/05/28 04:47:47.000.835,E:\Sistemas\Excellent\ProvaTecnica\SRC\ProvaTec.dproj=E:\Sistemas\Excellent\ProvaTecnica\SRC\Gerente.dproj</Transaction>
+    <Transaction>2023/05/28 04:50:43.000.576,=E:\Sistemas\Excellent\ProvaTecnica\SRC\View\ServerController.pas</Transaction>
+    <Transaction>2023/05/28 04:50:47.000.266,=E:\Sistemas\Excellent\ProvaTecnica\SRC\View\uformbase.pas</Transaction>
+    <Transaction>2023/05/28 04:50:47.000.314,=E:\Sistemas\Excellent\ProvaTecnica\SRC\View\umain.pas</Transaction>
+    <Transaction>2023/05/28 04:50:47.000.210,=E:\Sistemas\Excellent\ProvaTecnica\SRC\View\uclientes.pas</Transaction>
+    <Transaction>2023/05/28 04:50:47.000.363,=E:\Sistemas\Excellent\ProvaTecnica\SRC\View\UserSessionUnit.pas</Transaction>
+    <Transaction>2023/05/28 10:56:52.000.193,E:\Sistemas\Excellent\ProvaTecnica\SRC\View\uclientes.pas=E:\Sistemas\Excellent\ProvaTecnica\SRC\View\uCadclientes.pas</Transaction>
+    <Transaction>2023/05/28 10:56:52.000.193,E:\Sistemas\Excellent\ProvaTecnica\SRC\View\uclientes.dfm=E:\Sistemas\Excellent\ProvaTecnica\SRC\View\uCadclientes.dfm</Transaction>
+    <Transaction>2023/05/28 15:44:50.000.713,=E:\Sistemas\Excellent\ProvaTecnica\SRC\Model\uClienteModel.pas</Transaction>
+    <Transaction>2023/05/28 15:45:36.000.973,=E:\Sistemas\Excellent\ProvaTecnica\SRC\Controller\uClienteControl.pas</Transaction>
+    <Transaction>2023/05/28 15:46:40.000.207,=E:\Sistemas\Excellent\ProvaTecnica\SRC\DAO\uClienteDAO.pas</Transaction>
+    <Transaction>2023/05/28 15:47:06.000.273,=E:\Sistemas\Excellent\ProvaTecnica\SRC\DAO\uConexao.pas</Transaction>
+    <Transaction>2023/05/28 16:01:36.000.149,=E:\Sistemas\Excellent\ProvaTecnica\SRC\Model\uEnumerado.pas</Transaction>
+    <Transaction>2023/05/28 16:12:37.000.626,=E:\Sistemas\Excellent\ProvaTecnica\SRC\Controller\uSistemaControl.pas</Transaction>
+  </Transactions>
+</BorlandProject>

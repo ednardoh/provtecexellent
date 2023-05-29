@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  <title>Listagem de Pedidos</title>	
+
+		
+  	    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
+		<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+		
+ 	    <script type="text/javascript" charset="utf-8">
+			var table = $(document).ready(function() {
+				$('#gridprodutos').DataTable({responsive: true});
+				$('#TBLIWDBGRID1').DataTable({responsive: true});				
+			} );
+		</script>
+
+
+		<script type="text/javascript" charset="utf-8"> 
+			function setRecordPosition(id, Acao) {
+				debugger;
+				document.getElementById('IWEDITREMESSA').value = id;
+				AddChangedControl('IWEDITREMESSA');   // colocar essa linha sempre que usar o onAsyncClick pois colocar o campo como alterado
+				if (Acao == 'alterar')
+				{
+				  IWBUTTONEDIT.click();   
+				}
+				else if (Acao == 'excluir')
+				{
+				  IWBUTTONEXCLUIR.click();   
+				}                
+			}
+		</script>
+
+	</head>
+	<body>
+    	<div id="page-wrapper"> 
+			<div class="panel panel-primary ">  
+			    
+				
+				<div class="container">
+					<div class="clearfix" style="display:none">{%IWEDITREMESSA%}{%IWBUTTONEDIT%}{%IWBUTTONEXCLUIR%}</div>
+
+					<div class="col-sm-12">  
+						<button type="button" class="btn btn-primary" id="IWBUTTONNOVO">Adicionar novo registro</button>                        	
+                        {%IWBUTTONVOLTAR%}						
+					</div>							
+									
+					<div class="col-sm-12">  
+						<table id="gridprodutos" class="table table-hover table-striped table-condensed">
+							<thead>
+								<tr>
+								   <th>ID</th>								   
+                                   <th>NUMPEDI</th>
+                                   <th>DATA_EMISSAO</th>
+                                   <th>COD_CLIENTE </th>								   
+								   <th>Action</th>					   
+								</tr>
+							</thead>	
+							<tbody>
+								{%GRIDPEDIDOSDATA%}	
+							</tbody>
+						</table>						
+					</div>					
+				</div>
+			
+			</div>			
+		</div>  
+		
+		<!-- Modal -->
+		<div id="EditaDadosPedido" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+			 <!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Pedidos - Adição de Pedidos</h4>
+					</div>
+					<div class="modal-body">					    						
+						<div class="form-group">
+							<label for="id_produto">Num.Pedido</label>
+							{%IWDBEditID%} 
+						</div>						
+						<div class="form-group">
+							<label for="Codigobarra">Num. Pedido</label>
+							{%IWDBEditNUMPEDI%}
+						</div>
+						<div class="form-group">
+							<label for="Descricao">Data Emissão</label>
+							{%IWDBEditDATAEMISSAO%}
+						</div>
+						<div class="form-group">
+							<label for="PrecCompra">Cod. Cliente</label>
+							{%IWDBEditCODCLIENTE%}
+						</div>									
+					</div>
+					<script>
+						$('#EditaDados').on('shown.bs.modal', function () {
+								$('#IWDBEDITCUSTNO').focus();
+						});
+					</script>					
+					<div class="modal-footer">
+						{%IWButtonGravar%} 
+						{%IWBUTTONCANCELAR%}							
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div id="EditaDadosPedproduto" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+			 <!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Pedidos - Adição de Produtos</h4>
+						
+						<div class="form-group">
+							<label for="id_produto">Id. Pedido</label>
+							{%IWDBEditID%} 
+						</div>						
+						
+						<div class="form-group">
+							<label for="id_produto">Id.Produto</label>
+							{%IWDBEditNUMPEDI%} 
+						</div>						
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="id_produto">Produto</label>
+							{%IWDBComboBoxPRD%} 
+						</div>
+						<div class="form-group">
+							<label for="Codigobarra">Quantidade</label>
+							{%IWDBEditQUANTIDADE%}
+						</div>
+						<div class="form-group">
+							<label for="Descricao">Valor Unitario</label>
+							{%IWDBEditVALORUNITARIO%}
+						</div>
+						<div class="form-group">
+							<label for="PrecCompra">Valor Total</label>
+							{%IWDBEditVALORTOTAL%}
+						</div>									
+					</div>
+					<script>
+						$('#EditaDados').on('shown.bs.modal', function () {
+								$('#IWDBEDITCUSTNO').focus();
+						});
+					</script>					
+					<div class="modal-footer">
+						{%IWBUTTONGRAVARPEDPRD%} 						  
+						{%IWBUTTONCANCELARPEDPRD%}	                          					
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
+
+

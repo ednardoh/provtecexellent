@@ -1,0 +1,80 @@
+unit uformbase;
+
+interface
+
+uses
+  Classes, SysUtils, IWAppForm, IWApplication, IWColor, IWTypes, IWVCLComponent,
+  IWBaseLayoutComponent, IWBaseContainerLayout, IWContainerLayout,
+  IWTemplateProcessorHTML, IWCompButton, Vcl.Controls, IWVCLBaseControl,
+  IWBaseControl, IWBaseHTMLControl, IWControl, IWCompEdit, IWHTMLControls, IWHTMLTag;
+
+type
+  TIWFormBase = class(TIWAppForm)
+    IWTemplateProcessorHTML1: TIWTemplateProcessorHTML;
+    procedure IWAppFormCreate(Sender: TObject);
+    procedure IWLinkClientesAsyncClick(Sender: TObject;
+      EventParams: TStringList);
+  private
+
+  public
+    procedure DoSelectMenu(EventParams: TStringList);
+
+  end;
+
+const
+  MENU_CLIENTES = 'CLIENTES';
+  MENU_PRODUTOS = 'PRODUTOS';
+  MENUPEDIDOS   = 'PEDIDOS';
+
+implementation
+
+uses ServerController, UserSessionUnit, umain, UListClientes, UListProdutos, UListPedidos;
+
+{$R *.dfm}
+
+
+{ TIWFormBase }
+
+procedure TIWFormBase.DoSelectMenu(EventParams: TStringList);
+begin
+  if UpperCase(EventParams.Values['option'])=MENU_CLIENTES then
+    TIWFormListClientes.Create(WebApplication).Show
+  else if UpperCase(EventParams.Values['option'])=MENU_PRODUTOS then
+    TIWFormListProdutos.Create(WebApplication).Show
+  else if UpperCase(EventParams.Values['option'])=MENUPEDIDOS then
+    TIWFormListPedidos.Create(WebApplication).Show
+  else
+    WebApplication.ShowMessage('Cadastro de '+UpperCase(EventParams.Values['option']));
+end;
+
+procedure TIWFormBase.IWAppFormCreate(Sender: TObject);
+const
+  jsTag = '<script language="javascript" type="text/javascript">%s</script>';
+var
+  AjaxFunc: string;
+begin
+  // this is the JavaScript function that I want to call.
+  // This function, in turn, will call IWFormMain.DoSelectMenu()
+  AjaxFunc := 'function doSelectMenu(pOption) {' + #13 +
+      'executeAjaxEvent("&option="+pOption, null,"' + UpperCase(Self.Name) + '.DoSelectMenu", false, null, false);' + #13 +
+      'return true;}';
+  PageContext.ExtraHeader.Add(Format(jsTag, [AjaxFunc]));
+  // If we want to call IWForm2.DoMyAjaxFunc, then we have to register it as a Callback
+  WebApplication.RegisterCallBack(UpperCase(Self.Name) + '.DoSelectMenu', DoSelectMenu);
+
+  // this is the JavaScript function that I want to call.
+  // This function, in turn, will call IWFormMain.DoLogoff()
+  AjaxFunc := 'function doLogoff() {' + #13 +
+      'executeAjaxEvent("&option=", null,"' + UpperCase(Self.Name) + '.DoLogoff", false, null, false);' + #13 +
+      'return true;}';
+  PageContext.ExtraHeader.Add(Format(jsTag, [AjaxFunc]));
+
+end;
+
+procedure TIWFormBase.IWLinkClientesAsyncClick(Sender: TObject;
+  EventParams: TStringList);
+begin
+  WebApplication.ShowMessage('çink');
+end;
+
+end.

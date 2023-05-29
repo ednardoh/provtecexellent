@@ -1,0 +1,192 @@
+unit UListProdutos;
+
+interface
+
+uses
+  Classes, SysUtils, IWAppForm, IWApplication, IWColor, IWTypes, Data.DB,
+  Datasnap.DBClient, Vcl.Controls, IWVCLBaseControl, IWBaseControl,
+  IWBaseHTMLControl, IWControl, IWCompGrids, IWDBGrids, IWCompButton,
+  IWVCLComponent, IWBaseLayoutComponent, IWBaseContainerLayout,
+  IWContainerLayout, IWTemplateProcessorHTML, IWHTMLTag, IW.Content.Form,
+  IW.HTTP.Request, IWCompEdit, IWDBStdCtrls, uClienteControl, umain,
+  uEnumerado;
+
+type
+  TIWFormListClientes = class(TIWAppForm)
+    ds_Clientes: TDataSource;
+    IWTemplateProcessorHTML1: TIWTemplateProcessorHTML;
+    IWButtonGravar: TIWButton;
+    IWButtonCancelar: TIWButton;
+    IWDBEditNome: TIWDBEdit;
+    IWDBEditEndereco: TIWDBEdit;
+    IWDBEditCodigo: TIWDBEdit;
+    IWButtonNovo: TIWButton;
+    IWButtonExcluir: TIWButton;
+    IWEditRemessa: TIWEdit;
+    IWButtonEdit: TIWButton;
+    IWDBGrid1: TIWDBGrid;
+    IWDBEditBairro: TIWDBEdit;
+    IWDBEditCidade: TIWDBEdit;
+    IWDBEditNumero: TIWDBEdit;
+    IWDBEditCep: TIWDBEdit;
+    IWDBEditUF: TIWDBEdit;
+    IWBUTTONVOLTAR: TIWButton;
+    procedure IWButtonGravarClick(Sender: TObject);
+    procedure IWTemplateProcessorHTML1UnknownTag(const AName: string;
+      var VValue: string);
+    procedure IWAppFormCreate(Sender: TObject);
+    procedure IWButtonEditAsyncClick(Sender: TObject; EventParams: TStringList);
+    procedure IWButtonCancelarAsyncClick(Sender: TObject;
+      EventParams: TStringList);
+    procedure IWButtonNovoAsyncClick(Sender: TObject; EventParams: TStringList);
+    procedure IWBUTTONVOLTARAsyncClick(Sender: TObject;
+      EventParams: TStringList);
+    procedure IWButtonGravarAsyncClick(Sender: TObject;
+      EventParams: TStringList);
+    procedure IWButtonNovoClick(Sender: TObject);
+    procedure IWButtonExcluirClick(Sender: TObject);
+  private
+    Clientes  : TClienteControl;
+    Atipo: uEnumerado.TAcao;
+    procedure PopulateTable;
+  public
+
+  end;
+
+implementation
+
+{$R *.dfm}
+
+procedure TIWFormListClientes.PopulateTable;
+begin
+  Clientes := TClienteControl.Create;
+  ds_Clientes.DataSet := Clientes.Obter(1,'');  //ordena por codigo
+  Clientes.Free;
+end;
+
+procedure TIWFormListClientes.IWAppFormCreate(Sender: TObject);
+begin
+  PopulateTable;
+end;
+
+procedure TIWFormListClientes.IWButtonGravarAsyncClick(Sender: TObject;
+  EventParams: TStringList);
+begin
+  WebApplication.CallBackResponse.AddJavaScriptToExecute('$(''#EditaDados'').modal(''hide'');');
+end;
+
+procedure TIWFormListClientes.IWButtonGravarClick(Sender: TObject);
+begin
+  try
+    Clientes := TClienteControl.Create;
+    case ATipo of
+      uEnumerado.tacIncluir:
+      begin
+        Clientes.ClienteModel.Codigo   := Clientes.ClienteModel.GetId;
+        Clientes.ClienteModel.Nome     := ds_Clientes.DataSet.FieldByName('Nome').AsString;
+        Clientes.ClienteModel.Endereco := ds_Clientes.DataSet.FieldByName('Endereco').AsString;
+        Clientes.ClienteModel.Bairro   := ds_Clientes.DataSet.FieldByName('Bairro').AsString;
+        Clientes.ClienteModel.Cidade   := ds_Clientes.DataSet.FieldByName('Cidade').AsString;
+        Clientes.ClienteModel.Numero   := ds_Clientes.DataSet.FieldByName('Numero').AsString;
+        Clientes.ClienteModel.Cep      := ds_Clientes.DataSet.FieldByName('Cep').AsString;
+        Clientes.ClienteModel.UF       := ds_Clientes.DataSet.FieldByName('UF').AsString;
+        Clientes.Salvar;
+      end;
+      uEnumerado.tacAlterar:
+      begin
+        Clientes.ClienteModel.Codigo   := ds_Clientes.DataSet.FieldByName('Codigo').AsInteger;
+        Clientes.ClienteModel.Nome     := ds_Clientes.DataSet.FieldByName('Nome').AsString;
+        Clientes.ClienteModel.Endereco := ds_Clientes.DataSet.FieldByName('Endereco').AsString;
+        Clientes.ClienteModel.Bairro   := ds_Clientes.DataSet.FieldByName('Bairro').AsString;
+        Clientes.ClienteModel.Cidade   := ds_Clientes.DataSet.FieldByName('Cidade').AsString;
+        Clientes.ClienteModel.Numero   := ds_Clientes.DataSet.FieldByName('Numero').AsString;
+        Clientes.ClienteModel.Cep      := ds_Clientes.DataSet.FieldByName('Cep').AsString;
+        Clientes.ClienteModel.UF       := ds_Clientes.DataSet.FieldByName('UF').AsString;
+        Clientes.Salvar;
+      end;
+    end;
+  finally
+    TIWFormListClientes.Create(WebApplication).Show;
+    Clientes.Free;
+  end;
+end;
+
+procedure TIWFormListClientes.IWButtonNovoAsyncClick(Sender: TObject;
+  EventParams: TStringList);
+begin
+  Atipo := uEnumerado.tacIncluir; //diz qual é o processo do CRUD
+  ds_Clientes.DataSet.Append;
+  WebApplication.CallBackResponse.AddJavaScriptToExecute('$(''#EditaDados'').modal(''show'');');  //chama a showmodal
+end;
+
+procedure TIWFormListClientes.IWButtonNovoClick(Sender: TObject);
+begin
+  Atipo := uEnumerado.tacIncluir; //diz qual é o processo do CRUD
+end;
+
+procedure TIWFormListClientes.IWBUTTONVOLTARAsyncClick(Sender: TObject;
+  EventParams: TStringList);
+begin
+  TIWFormMain.Create(WebApplication).Show;
+  // Destrói o formulário atual:
+  Release;
+end;
+
+procedure TIWFormListClientes.IWButtonCancelarAsyncClick(Sender: TObject;
+  EventParams: TStringList);
+begin
+  WebApplication.CallBackResponse.AddJavaScriptToExecute('$(''#EditaDados'').modal(''hide'');');
+end;
+
+procedure TIWFormListClientes.IWButtonEditAsyncClick(Sender: TObject;
+  EventParams: TStringList);
+begin
+  Atipo := uEnumerado.tacAlterar; //diz qual é o processo do CRUD
+  Clientes := TClienteControl.Create;
+  ds_Clientes.DataSet := Clientes.ObterNomeCLI(IWEditRemessa.Text);
+  Clientes.Free;
+
+  if ds_Clientes.DataSet.Locate('codigo',IWEditRemessa.Text,[]) then
+  begin
+    WebApplication.CallBackResponse.AddJavaScriptToExecute('$(''#EditaDados'').modal(''show'');');
+  end
+  else
+    raise Exception.Create('Registro não localizado!');
+end;
+
+procedure TIWFormListClientes.IWButtonExcluirClick(Sender: TObject);
+begin
+  Atipo := uEnumerado.tacExcluir; //diz qual é o processo do CRUD
+  Clientes := TClienteControl.Create;
+  Clientes.ClienteModel.Codigo := ds_Clientes.DataSet.FieldByName('Codigo').AsInteger;
+  Clientes.Salvar;
+  Clientes.Free;
+
+  TIWFormListClientes.Create(WebApplication).Show;
+
+end;
+
+procedure TIWFormListClientes.IWTemplateProcessorHTML1UnknownTag(
+  const AName: string; var VValue: string);
+begin
+  if AnsiUpperCase(AName)='GRIDCLIENTESDATA' then
+  begin
+    ds_Clientes.DataSet.First;
+    while not ds_Clientes.DataSet.Eof do
+    begin
+      VValue:=VValue+'<tr><td>'+ds_Clientes.DataSet.FieldByName('codigo').AsString+'</td>'+SLineBreak+
+        '<td>'+ds_Clientes.DataSet.FieldByName('nome').AsString+'</td>'+SLineBreak+
+        '<td>'+ds_Clientes.DataSet.FieldByName('cidade').AsString+'</td>'+SLineBreak+
+        '<td>'+ds_Clientes.DataSet.FieldByName('cep').AsString+'</td>'+SLineBreak+
+        '<td>'+ds_Clientes.DataSet.FieldByName('uf').AsString+'</td>'+SLineBreak+
+        '<td>'+
+          '<button type="button" class="btn btn-warning" onclick="return setRecordPosition('+ds_Clientes.DataSet.FieldByName('codigo').AsString+',''alterar'')">Editar</button>'+SLineBreak+
+          '<button type="button" class="btn btn-danger" onclick="return setRecordPosition('+ds_Clientes.DataSet.FieldByName('codigo').AsString+',''excluir'')">Excluir</button>'+SLineBreak+
+        '</td></tr>';
+      ds_Clientes.DataSet.Next;
+    end;
+  end;
+
+end;
+
+end.

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  <title>Listagem de Produtos</title>	
+
+		
+  	    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
+		<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+		
+ 	    <script type="text/javascript" charset="utf-8">
+			var table = $(document).ready(function() {
+				$('#gridprodutos').DataTable({responsive: true});
+				$('#TBLIWDBGRID1').DataTable({responsive: true});				
+			} );
+		</script>
+
+
+		<script type="text/javascript" charset="utf-8"> 
+			function setRecordPosition(id, Acao) {
+				debugger;
+				document.getElementById('IWEDITREMESSA').value = id;
+				AddChangedControl('IWEDITREMESSA');   // colocar essa linha sempre que usar o onAsyncClick pois colocar o campo como alterado
+				if (Acao == 'alterar')
+				{
+				  IWBUTTONEDIT.click();   
+				}
+				else if (Acao == 'excluir')
+				{
+				  IWBUTTONEXCLUIR.click();   
+				}                
+			}
+		</script>
+
+	</head>
+	<body>
+    	<div id="page-wrapper"> 
+			<div class="panel panel-primary ">  
+			    
+				
+				<div class="container">
+					<div class="clearfix" style="display:none">{%IWEDITREMESSA%}{%IWBUTTONEDIT%}{%IWBUTTONEXCLUIR%}</div>
+
+					<div class="col-sm-12">  
+						<button type="button" class="btn btn-primary" id="IWBUTTONNOVO">Adicionar novo registro</button>                        	
+                        {%IWBUTTONVOLTAR%}						
+					</div>							
+									
+					<div class="col-sm-12">  
+						<table id="gridprodutos" class="table table-hover table-striped table-condensed">
+							<thead>
+								<tr>
+								   <th>ID</th>								   
+                                   <th>Descricao</th>
+                                   <th>PRECO_COMPRA</th>
+                                   <th>PRECO_VENDA</th>	
+                                   <th>QTD_ESTOQUE</th>								   
+								   <th>Action</th>					   
+								</tr>
+							</thead>	
+							<tbody>
+								{%GRIDPRODUTOSDATA%}	
+							</tbody>
+						</table>						
+					</div>					
+				</div>
+			
+			</div>			
+		</div>  
+		
+		<!-- Modal -->
+		<div id="EditaDados" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+			 <!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Produtos - Edição de dados</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="id_produto">Codigo</label>
+							{%IWDBEditCodigo%} 
+						</div>
+						<div class="form-group">
+							<label for="Codigobarra">Cod.barra</label>
+							{%IWDBEditCodigobarra%}
+						</div>
+						<div class="form-group">
+							<label for="Descricao">Descricao</label>
+							{%IWDBEditDescricao%}
+						</div>
+						<div class="form-group">
+							<label for="PrecCompra">Prec.Compra</label>
+							{%IWDBEditPRECOCOMPRA%}
+						</div>
+						<div class="form-group">
+							<label for="PrecVenda">Prec.Venda</label>
+							{%IWDBEditPRECOVENDA%}
+						</div>
+						<div class="form-group">
+							<label for="QtdeEstoqu">Qtde.Estoque</label>
+							{%IWDBEditQTDEESTOQUE%}
+						</div>				
+					</div>
+					<script>
+						$('#EditaDados').on('shown.bs.modal', function () {
+								$('#IWDBEDITCUSTNO').focus();
+						});
+					</script>					
+					<div class="modal-footer">
+						{%IWButtonGravar%} 
+						{%IWBUTTONCANCELAR%}							
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+          {%IWImageProd%}
+		</div>  
+	</body>
+</html>
+
+

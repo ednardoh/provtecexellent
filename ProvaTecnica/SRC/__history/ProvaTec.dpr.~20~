@@ -1,0 +1,26 @@
+program ProvaTec;
+
+{$DEFINE IW}
+
+uses
+  Forms,
+  IWStart,
+  UTF8ContentParser,
+  ServerController in 'View\ServerController.pas' {IWServerController: TIWServerControllerBase},
+  uformbase in 'View\uformbase.pas' {IWFormBase: TIWAppForm},
+  umain in 'View\umain.pas' {IWFormMain: TIWAppForm},
+  UserSessionUnit in 'View\UserSessionUnit.pas' {IWUserSession: TIWUserSessionBase},
+  UListClientes in 'View\UListClientes.pas' {IWFormListClientes: TIWFormListClientes},
+  uClienteModel in 'Model\uClienteModel.pas',
+  uClienteModel in 'Model\uProdutoModel.pas',
+  uClienteControl in 'Controller\uClienteControl.pas',
+  uClienteDAO in 'DAO\uClienteDAO.pas',
+  uConexao in 'DAO\uConexao.pas',
+  uEnumerado in 'Model\uEnumerado.pas',
+  uSistemaControl in 'Controller\uSistemaControl.pas';
+
+{$R *.res}
+
+begin
+  TIWStart.Execute(True);
+end.
